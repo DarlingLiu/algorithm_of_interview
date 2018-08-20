@@ -1,41 +1,22 @@
 package ldl.swordoffer;
 
 /**
- * 把只包含质因子2、3和5的数称作丑数（Ugly Number）。例如6、8都是丑数，但14不是，因为它包含质因子7。 
- * 习惯上我们把1当做是第一个丑数。求按从小到大的顺序的第N个丑数。
+ * 汇编语言中有一种移位指令叫做循环左移（ROL），现在有个简单的任务，就是用字符串模拟这个指令的运算结果。
+ * 对于一个给定的字符序列S，请你把其循环左移K位后的序列输出。
+ * 例如，字符序列S=”abcXYZdef”,要求输出循环左移3位后的结果，即“XYZdefabc”。是不是很简单？OK，搞定它！
  * @author darlingliu
  *
  */
 
 public class Problem43 {
 	
-    public int GetUglyNumber_Solution(int index) {
-    	if(index <= 0)
-    		return 0;
-    	int[] choushu = new int[index];
-    	choushu[0] = 1;
-    	int id2 = 0;
-    	int id3 = 0;
-    	int id5 = 0;
-    	int count = 1;
-    	while(count < index) {
-    		int tmp = Math.min(choushu[id2]*2, Math.min(choushu[id3]*3, choushu[id5]*5));
-    		if(tmp == choushu[id2]*2)
-    			id2++;
-    		if(tmp == choushu[id3]*3)
-    			id3++;
-    		if(tmp == choushu[id5]*5)
-    			id5++;
-    		choushu[count++] = tmp;
-    	}
-    	return choushu[index-1];
+    public String LeftRotateString(String str, int n) {
+    	if(str == null || str.equals(""))
+    		return str;
+        int move = n % str.length();
+        if(move == 0)
+        	return str;
+        return str.substring(move, str.length()) + str.substring(0, move);
     }
-
-	public static void main(String[] args) {
-		Problem43 test = new Problem43();
-		int a = test.GetUglyNumber_Solution(7);
-		System.out.println(a);
-
-	}
 
 }
